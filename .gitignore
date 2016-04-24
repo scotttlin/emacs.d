@@ -1,0 +1,17 @@
+elpa/
+.smex-items
+*~$
+places
+savehist
+.recentf
+.lein-env
+cider
+cider-history
+projectile-bookmarks.eld
+projectile.cache
+ido.last
+auto-save-list
+backups
+archive-contents
+.cask
+.sx
