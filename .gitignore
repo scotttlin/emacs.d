@@ -3,7 +3,7 @@ elpa/
 *~$
 places
 savehist
-.recentf
+recentf
 .lein-env
 cider
 cider-history
