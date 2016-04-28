@@ -16,12 +16,11 @@
     (setq use-file-dialog nil
           use-dialog-box nil)))
 
-(if (or (equal system-name "akami.local")
-        (equal system-name "akami"))
-    (setq initial-frame-alist '((top . 0) (left . 0)
-                                (width . 181) (height . 41)))
-  (setq initial-frame-alist '((top . 0) (left . 0)
-                              (width . 283) (height . 60))))
+;;; Screen maximization and full-screen
+;; Http://www.emacswiki.org/emacs/FullScreen
+;; (set-frame-parameter nil 'fullscreen 'fullboth)
+(setq initial-frame-alist
+      '((fullscreen . maximized)))
 
 (use-package fringe
   :init (fringe-mode 4)
