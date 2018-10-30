@@ -12,8 +12,6 @@
 ;; Always load newest byte code
 (setq load-prefer-newer t)
 
-(package-initialize)
-
 ;; https://github.com/jwiegley/use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -91,7 +89,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(package-selected-packages
+   '(helm-flycheck flycheck markdown-mode cljr-helm clj-refactor cider clojure-mode-extra-font-locking clojure-mode exec-path-from-shell auto-indent-mode aggressive-indent page-break-lines rainbow-delimiters hl-todo auto-save-buffers-enhanced git-gutter auto-yasnippet yasnippet company-quickhelp helm-company company-flx company undo-tree magit ag projectile helm-dash helm-ls-git helm-unicode helm-descbinds helm-fuzzier helm-flx avy-zap rainbow-mode helm-themes spaceline afternoon-theme use-package paradox)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

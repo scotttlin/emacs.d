@@ -190,48 +190,68 @@
   :commands rainbow-delimiters-mode
   :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-(use-package paredit
+(use-package parinfer
   :ensure t
-  :defer t
-  :diminish paredit-mode
-  :commands paredit-mode
-  :preface
-  (progn
-    (defun minibuffer-paredit-mode-maybe ()
-      (if (eq this-command 'eval-expression)
-	  (paredit-mode 1)))
-    (defun paredit-wrap-round-from-behind ()
-      (interactive)
-      (forward-sexp -1)
-      (paredit-wrap-round)
-      (insert " ")
-      (forward-char -1))
-    (defun paredit-wrap-square-from-behind ()
-      (interactive)
-      (forward-sexp -1)
-      (paredit-wrap-square))
-    (defun paredit-wrap-curly-from-behind ()
-      (interactive)
-      (forward-sexp -1)
-      (paredit-wrap-curly)))
-  :functions
-  (paredit-wrap-round
-   paredit-wrap-square
-   paredit-wrap-curly)
+  :bind
+  (("C-," . parinfer-toggle-mode))
   :init
   (progn
-    (add-hook 'minibuffer-setup-hook 'minibuffer-paredit-mode-maybe)
-    (add-hook 'lisps-mode-hook 'paredit-mode)
-    (add-hook 'cider-repl-mode-hook 'paredit-mode))
-  :config
-  (bind-keys
-   :map paredit-mode-map
-   ("M-(" . paredit-wrap-round)
-   ("M-)" . paredit-wrap-round-from-behind)
-   ("M-[" . paredit-wrap-square)
-   ("M-]" . paredit-wrap-square-from-behind)
-   ("M-{" . paredit-wrap-curly)
-   ("M-}" . paredit-wrap-curly-from-behind)))
+    (setq parinfer-extensions
+          '(defaults       ; should be included.
+             pretty-parens  ; different paren styles for different modes.
+             evil           ; If you use Evil.
+             lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
+             paredit        ; Introduce some paredit commands.
+             smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+             smart-yank))   ; Yank behavior depend on mode.
+    (add-hook 'clojure-mode-hook #'parinfer-mode)
+    (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'common-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'scheme-mode-hook #'parinfer-mode)
+    (add-hook 'lisp-mode-hook #'parinfer-mode)))
+
+;; (use-package paredit
+;;   :ensure t
+;;   :defer t
+;;   :diminish paredit-mode
+;;   :commands paredit-mode
+;;   :preface
+;;   (progn
+;;     (defun minibuffer-paredit-mode-maybe ()
+;;       (if (eq this-command 'eval-expression)
+;; 	  (paredit-mode 1)))
+;;     (defun paredit-wrap-round-from-behind ()
+;;       (interactive)
+;;       (forward-sexp -1)
+;;       (paredit-wrap-round)
+;;       (insert " ")
+;;       (forward-char -1))
+;;     (defun paredit-wrap-square-from-behind ()
+;;       (interactive)
+;;       (forward-sexp -1)
+;;       (paredit-wrap-square))
+;;     (defun paredit-wrap-curly-from-behind ()
+;;       (interactive)
+;;       (forward-sexp -1)
+;;       (paredit-wrap-curly)))
+;;   :functions
+;;   (paredit-wrap-round
+;;    paredit-wrap-square
+;;    paredit-wrap-curly)
+;;   :init
+;;   (progn
+;;     (add-hook 'minibuffer-setup-hook 'minibuffer-paredit-mode-maybe)
+;;     (add-hook 'lisps-mode-hook 'paredit-mode)
+;;     (add-hook 'cider-repl-mode-hook 'paredit-mode))
+;;   :config
+;;   (bind-keys
+;;    :map paredit-mode-map
+;;    ("M-(" . paredit-wrap-round)
+;;    ("M-)" . paredit-wrap-round-from-behind)
+;;    ("M-[" . paredit-wrap-square)
+;;    ("M-]" . paredit-wrap-square-from-behind)
+;;    ("M-{" . paredit-wrap-curly)
+;;    ("M-}" . paredit-wrap-curly-from-behind)))
 
 (use-package whitespace
   :init

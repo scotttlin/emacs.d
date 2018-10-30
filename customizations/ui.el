@@ -1,26 +1,24 @@
 ;; GUI customization
 
-;; Fonts
-(setq-default line-spacing nil)
-(setq mac-allow-anti-aliasing t)
-(global-prettify-symbols-mode t)
-(add-to-list 'default-frame-alist '(font . "Fira mono-11"))
-(set-face-attribute 'default t :font "Fira mono-11")
-
-(use-package frames
-  :init
-  (progn
-    (tool-bar-mode -1)
-    (scroll-bar-mode -1)
-    (menu-bar-mode -1)
-    (setq use-file-dialog nil
-          use-dialog-box nil)))
+;; Frames
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
+(setq use-file-dialog nil
+          use-dialog-box nil)
 
 ;;; Screen maximization and full-screen
 ;; Http://www.emacswiki.org/emacs/FullScreen
 ;; (set-frame-parameter nil 'fullscreen 'fullboth)
 (setq initial-frame-alist
       '((fullscreen . maximized)))
+
+;; Fonts
+(setq-default line-spacing nil)
+(setq mac-allow-anti-aliasing t)
+(global-prettify-symbols-mode t)
+(add-to-list 'default-frame-alist '(font . "Fira Code-11"))
+(set-face-attribute 'default t :font "Fira Code-11")
 
 (use-package fringe
   :init (fringe-mode 4)
